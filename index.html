@@ -1,128 +1,660 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="ht">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Optimiste Group — Platfòm Pwodwi Teknoloji</title>
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
-<style>
-  :root {
-    --navy: #0A1F44;
-    --blue: #1565C0;
-    --sky: #42A5F5;
-    --white: #FFFFFF;
-    --light: #E8F4FD;
-    --gray: #8BA3C7;
-  }
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-  html { scroll-behavior: smooth; }
-  body { font-family: 'DM Sans', sans-serif; background: var(--navy); color: var(--white); overflow-x: hidden; }
-  nav { position: fixed; top: 0; width: 100%; z-index: 100; display: flex; justify-content: space-between; align-items: center; padding: 20px 40px; background: rgba(10,31,68,0.95); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(66,165,245,0.15); }
-  .nav-logo { font-family: 'Syne', sans-serif; font-size: 22px; font-weight: 800; color: var(--white); letter-spacing: 1px; }
-  .nav-logo span { color: var(--sky); }
-  .nav-links { display: flex; gap: 32px; list-style: none; }
-  .nav-links a { color: var(--gray); text-decoration: none; font-size: 14px; font-weight: 500; transition: color 0.3s; }
-  .nav-btn { background: var(--sky); color: var(--navy); border: none; padding: 10px 24px; border-radius: 50px; font-weight: 700; font-size: 13px; cursor: pointer; }
-  .hero { min-height: 100vh; display: flex; align-items: center; padding: 120px 40px 80px; position: relative; overflow: hidden; }
-  .hero::before { content: ''; position: absolute; top: -200px; right: -200px; width: 700px; height: 700px; background: radial-gradient(circle, rgba(21,101,192,0.3) 0%, transparent 70%); border-radius: 50%; animation: pulse 6s ease-in-out infinite; }
-  @keyframes pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.1); } }
-  .hero-content { max-width: 700px; position: relative; z-index: 2; }
-  .hero-badge { display: inline-flex; align-items: center; gap: 8px; background: rgba(66,165,245,0.15); border: 1px solid rgba(66,165,245,0.3); padding: 8px 18px; border-radius: 50px; font-size: 12px; color: var(--sky); letter-spacing: 2px; text-transform: uppercase; margin-bottom: 32px; }
-  h1 { font-family: 'Syne', sans-serif; font-size: clamp(42px, 7vw, 80px); font-weight: 800; line-height: 1.05; margin-bottom: 24px; }
-  h1 .accent { color: var(--sky); }
-  .hero-desc { font-size: 18px; line-height: 1.7; color: var(--gray); max-width: 560px; margin-bottom: 48px; }
-  .hero-btns { display: flex; gap: 16px; flex-wrap: wrap; }
-  .btn-primary { background: var(--sky); color: var(--navy); padding: 16px 36px; border-radius: 50px; font-weight: 700; font-size: 15px; text-decoration: none; }
-  .btn-outline { border: 1px solid rgba(255,255,255,0.3); color: var(--white); padding: 16px 36px; border-radius: 50px; font-size: 15px; text-decoration: none; }
-  .stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: rgba(255,255,255,0.08); }
-  .stat { padding: 40px; text-align: center; background: var(--navy); }
-  .stat-num { font-family: 'Syne', sans-serif; font-size: 42px; font-weight: 800; color: var(--sky); display: block; }
-  .stat-label { color: var(--gray); font-size: 13px; }
-  section { padding: 100px 40px; }
-  .section-tag { font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: var(--sky); margin-bottom: 16px; display: block; }
-  h2 { font-family: 'Syne', sans-serif; font-size: clamp(32px, 5vw, 52px); font-weight: 800; line-height: 1.1; margin-bottom: 20px; }
-  .services { background: rgba(21,101,192,0.05); }
-  .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; margin-top: 60px; }
-  .service-card { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); border-radius: 20px; padding: 36px; transition: all 0.3s; }
-  .service-icon { width: 56px; height: 56px; background: rgba(66,165,245,0.15); border-radius: 16px; display: flex; align-items: center; justify-content: center; font-size: 26px; margin-bottom: 24px; }
-  .service-card h3 { font-family: 'Syne', sans-serif; font-size: 20px; font-weight: 700; margin-bottom: 12px; }
-  .service-card p { color: var(--gray); font-size: 14px; line-height: 1.7; }
-  .steps { display: flex; flex-direction: column; margin-top: 60px; }
-  .step { display: flex; gap: 32px; padding: 40px 0; border-bottom: 1px solid rgba(255,255,255,0.06); }
-  .step-num { font-family: 'Syne', sans-serif; font-size: 64px; font-weight: 800; color: rgba(66,165,245,0.15); min-width: 80px; }
-  .step h3 { font-family: 'Syne', sans-serif; font-size: 22px; font-weight: 700; margin-bottom: 8px; }
-  .step p { color: var(--gray); font-size: 15px; line-height: 1.7; }
-  .contact { background: rgba(21,101,192,0.08); text-align: center; }
-  .contact-card { background: linear-gradient(135deg, rgba(21,101,192,0.3), rgba(66,165,245,0.1)); border: 1px solid rgba(66,165,245,0.2); border-radius: 28px; padding: 80px 40px; max-width: 700px; margin: 0 auto; }
-  .contact-email { display: inline-block; color: var(--sky); font-size: 18px; margin: 32px 0; text-decoration: none; }
-  footer { padding: 40px; border-top: 1px solid rgba(255,255,255,0.06); display: flex; justify-content: space-between; align-items: center; }
-  .footer-logo { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 18px; }
-  .footer-logo span { color: var(--sky); }
-  footer p { color: var(--gray); font-size: 13px; }
-  @media (max-width: 600px) { nav { padding: 16px 20px; } .nav-links { display: none; } .hero { padding: 100px 20px 60px; } section { padding: 70px 20px; } .stats { grid-template-columns: 1fr; } .step { flex-direction: column; } footer { flex-direction: column; gap: 12px; text-align: center; } }
-</style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Optimistegroup | Teknoloji & Inovasyon</title>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --blue-deep: #0a1628;
+      --blue-mid: #1a3a6e;
+      --blue-bright: #1e6fff;
+      --blue-light: #4d9fff;
+      --blue-pale: #e8f1ff;
+      --white: #ffffff;
+      --gray: #8a9ab5;
+      --accent: #00c6ff;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--blue-deep);
+      color: var(--white);
+      overflow-x: hidden;
+    }
+
+    /* ── NAVBAR ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 18px 5%;
+      background: rgba(10,22,40,0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(30,111,255,0.15);
+    }
+
+    .nav-logo {
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: 1.4rem;
+      letter-spacing: -0.5px;
+      color: var(--white);
+    }
+
+    .nav-logo span { color: var(--blue-bright); }
+
+    .nav-links {
+      display: flex;
+      gap: 30px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--gray);
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 500;
+      transition: color 0.3s;
+    }
+
+    .nav-links a:hover { color: var(--white); }
+
+    .nav-cta {
+      background: var(--blue-bright);
+      color: var(--white) !important;
+      padding: 10px 22px;
+      border-radius: 50px;
+      font-weight: 500 !important;
+      transition: background 0.3s, transform 0.2s !important;
+    }
+
+    .nav-cta:hover {
+      background: var(--blue-light) !important;
+      transform: translateY(-1px);
+    }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 120px 5% 80px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      width: 700px; height: 700px;
+      background: radial-gradient(circle, rgba(30,111,255,0.18) 0%, transparent 70%);
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      animation: pulse 6s ease-in-out infinite;
+    }
+
+    .hero::after {
+      content: '';
+      position: absolute;
+      width: 400px; height: 400px;
+      background: radial-gradient(circle, rgba(0,198,255,0.12) 0%, transparent 70%);
+      top: 30%; right: 10%;
+      animation: pulse 8s ease-in-out infinite reverse;
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: translate(-50%, -50%) scale(1); }
+      50% { transform: translate(-50%, -50%) scale(1.15); }
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(30,111,255,0.15);
+      border: 1px solid rgba(30,111,255,0.3);
+      padding: 8px 20px;
+      border-radius: 50px;
+      font-size: 0.8rem;
+      color: var(--accent);
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-bottom: 30px;
+      position: relative;
+      z-index: 1;
+      animation: fadeDown 0.8s ease both;
+    }
+
+    .dot {
+      width: 6px; height: 6px;
+      background: var(--accent);
+      border-radius: 50%;
+      animation: blink 1.5s infinite;
+    }
+
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.3; }
+    }
+
+    .logo-circle {
+      width: 110px; height: 110px;
+      background: linear-gradient(135deg, var(--blue-bright), var(--accent));
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 30px;
+      position: relative;
+      z-index: 1;
+      box-shadow: 0 0 50px rgba(30,111,255,0.4);
+      animation: fadeDown 0.9s ease both;
+    }
+
+    .logo-circle span {
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: 2.2rem;
+      color: white;
+      letter-spacing: -1px;
+    }
+
+    h1 {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(2.4rem, 6vw, 4.5rem);
+      font-weight: 800;
+      line-height: 1.1;
+      letter-spacing: -1.5px;
+      position: relative;
+      z-index: 1;
+      animation: fadeUp 0.9s ease 0.1s both;
+    }
+
+    h1 .highlight {
+      background: linear-gradient(90deg, var(--blue-bright), var(--accent));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero-sub {
+      margin-top: 20px;
+      font-size: 1.05rem;
+      color: var(--gray);
+      max-width: 520px;
+      line-height: 1.7;
+      position: relative;
+      z-index: 1;
+      animation: fadeUp 0.9s ease 0.2s both;
+    }
+
+    .hero-btns {
+      display: flex;
+      gap: 14px;
+      margin-top: 40px;
+      flex-wrap: wrap;
+      justify-content: center;
+      position: relative;
+      z-index: 1;
+      animation: fadeUp 0.9s ease 0.3s both;
+    }
+
+    .btn-primary {
+      background: var(--blue-bright);
+      color: white;
+      padding: 14px 32px;
+      border-radius: 50px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.95rem;
+      transition: all 0.3s;
+      box-shadow: 0 8px 30px rgba(30,111,255,0.35);
+    }
+
+    .btn-primary:hover {
+      background: var(--blue-light);
+      transform: translateY(-2px);
+      box-shadow: 0 12px 40px rgba(30,111,255,0.5);
+    }
+
+    .btn-secondary {
+      background: rgba(255,255,255,0.07);
+      color: white;
+      padding: 14px 32px;
+      border-radius: 50px;
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 0.95rem;
+      border: 1px solid rgba(255,255,255,0.12);
+      transition: all 0.3s;
+    }
+
+    .btn-secondary:hover {
+      background: rgba(255,255,255,0.12);
+      transform: translateY(-2px);
+    }
+
+    /* ── SECTIONS ── */
+    section {
+      padding: 90px 5%;
+    }
+
+    .section-label {
+      font-size: 0.75rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 12px;
+    }
+
+    .section-title {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      font-weight: 700;
+      letter-spacing: -0.5px;
+      margin-bottom: 16px;
+    }
+
+    .section-desc {
+      color: var(--gray);
+      font-size: 1rem;
+      line-height: 1.7;
+      max-width: 500px;
+    }
+
+    /* ── SERVICES ── */
+    #sèvis {
+      background: rgba(255,255,255,0.02);
+      border-top: 1px solid rgba(255,255,255,0.05);
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
+      margin-top: 50px;
+    }
+
+    .service-card {
+      background: rgba(30,111,255,0.06);
+      border: 1px solid rgba(30,111,255,0.15);
+      border-radius: 20px;
+      padding: 36px 30px;
+      transition: all 0.3s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .service-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--blue-bright), var(--accent));
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+
+    .service-card:hover {
+      background: rgba(30,111,255,0.1);
+      border-color: rgba(30,111,255,0.35);
+      transform: translateY(-4px);
+    }
+
+    .service-card:hover::before { opacity: 1; }
+
+    .service-icon {
+      font-size: 2.2rem;
+      margin-bottom: 20px;
+      display: block;
+    }
+
+    .service-card h3 {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.2rem;
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+
+    .service-card p {
+      color: var(--gray);
+      font-size: 0.9rem;
+      line-height: 1.7;
+    }
+
+    /* ── ABOUT ── */
+    .about-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
+    }
+
+    .about-visual {
+      position: relative;
+    }
+
+    .about-box {
+      background: linear-gradient(135deg, rgba(30,111,255,0.12), rgba(0,198,255,0.08));
+      border: 1px solid rgba(30,111,255,0.2);
+      border-radius: 24px;
+      padding: 50px 40px;
+      text-align: center;
+    }
+
+    .about-box .big-num {
+      font-family: 'Syne', sans-serif;
+      font-size: 5rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, var(--blue-bright), var(--accent));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      line-height: 1;
+    }
+
+    .about-box .big-label {
+      color: var(--gray);
+      font-size: 0.9rem;
+      margin-top: 10px;
+    }
+
+    .stats-row {
+      display: flex;
+      gap: 20px;
+      margin-top: 20px;
+    }
+
+    .stat-mini {
+      flex: 1;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 14px;
+      padding: 20px;
+      text-align: center;
+    }
+
+    .stat-mini .n {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: var(--accent);
+    }
+
+    .stat-mini .l {
+      font-size: 0.75rem;
+      color: var(--gray);
+      margin-top: 4px;
+    }
+
+    /* ── CONTACT ── */
+    #kontakt {
+      background: rgba(255,255,255,0.02);
+      border-top: 1px solid rgba(255,255,255,0.05);
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 20px;
+      margin-top: 50px;
+    }
+
+    .contact-card {
+      background: rgba(30,111,255,0.06);
+      border: 1px solid rgba(30,111,255,0.15);
+      border-radius: 16px;
+      padding: 28px 24px;
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      transition: all 0.3s;
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .contact-card:hover {
+      background: rgba(30,111,255,0.12);
+      border-color: rgba(30,111,255,0.3);
+      transform: translateY(-3px);
+    }
+
+    .contact-icon {
+      font-size: 1.4rem;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    .contact-info .label {
+      font-size: 0.72rem;
+      color: var(--accent);
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+
+    .contact-info .val {
+      font-size: 0.9rem;
+      color: var(--white);
+      font-weight: 500;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      padding: 40px 5%;
+      border-top: 1px solid rgba(255,255,255,0.07);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .footer-logo {
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: 1.1rem;
+    }
+
+    .footer-logo span { color: var(--blue-bright); }
+
+    footer p {
+      color: var(--gray);
+      font-size: 0.82rem;
+    }
+
+    .footer-social a {
+      color: var(--gray);
+      text-decoration: none;
+      font-size: 0.85rem;
+      transition: color 0.3s;
+    }
+
+    .footer-social a:hover { color: var(--white); }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fadeDown {
+      from { opacity: 0; transform: translateY(-16px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .about-inner { grid-template-columns: 1fr; }
+      .stats-row { flex-direction: column; }
+      footer { flex-direction: column; text-align: center; }
+    }
+  </style>
 </head>
 <body>
-<nav>
-  <div class="nav-logo">Optimiste<span>.</span></div>
-  <ul class="nav-links">
-    <li><a href="#services">Sèvis</a></li>
-    <li><a href="#comment">Kijan</a></li>
-    <li><a href="#contact">Kontakt</a></li>
-  </ul>
-  <button class="nav-btn">Kòmanse →</button>
-</nav>
-<section class="hero">
-  <div class="hero-content">
-    <div class="hero-badge">Platfòm Teknoloji Ayiti</div>
-    <h1>Konekte Biznis<br>ak <span class="accent">Opòtinite</span></h1>
-    <p class="hero-desc">Optimiste Group devlope solisyon dijital entèlijan pou fasilite kominikasyon, vant, ak kwasans biznis nan mache lokal ak entènasyonal.</p>
-    <div class="hero-btns">
-      <a href="#contact" class="btn-primary">Kontakte Nou</a>
-      <a href="#services" class="btn-outline">Dekouvri Sèvis yo →</a>
+
+  <!-- NAVBAR -->
+  <nav>
+    <div class="nav-logo">Optimiste<span>group</span></div>
+    <ul class="nav-links">
+      <li><a href="#sèvis">Sèvis</a></li>
+      <li><a href="#nou">Nou</a></li>
+      <li><a href="#kontakt">Kontakt</a></li>
+      <li><a href="#kontakt" class="nav-cta">Kòmanse</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-badge">
+      <span class="dot"></span>
+      Teknoloji · Inovasyon · Ayiti
     </div>
-  </div>
-</section>
-<div class="stats">
-  <div class="stat"><span class="stat-num">100+</span><span class="stat-label">Biznis Konekte</span></div>
-  <div class="stat"><span class="stat-num">2</span><span class="stat-label">Mache — Lokal & Entènasyonal</span></div>
-  <div class="stat"><span class="stat-num">24/7</span><span class="stat-label">Sipò Disponib</span></div>
-</div>
-<section class="services" id="services">
-  <span class="section-tag">Sa Nou Ofri</span>
-  <h2>Sèvis Nou yo</h2>
-  <div class="services-grid">
-    <div class="service-card"><div class="service-icon">🌐</div><h3>Platfòm Dijital</h3><p>Kreye vizibilite pou pwodwi inovatè ou yo sou yon platfòm pwofesyonèl ki rive toupatou.</p></div>
-    <div class="service-card"><div class="service-icon">🤝</div><h3>Koneksyon Kliyan</h3><p>Nou sèvi kòm pon ant kliyan ak propriétaire pou fasilite transaksyon ak kominikasyon.</p></div>
-    <div class="service-card"><div class="service-icon">📈</div><h3>Kwasans Biznis</h3><p>Estrateji ak zouti pou ede biznis ou grandi nan mache lokal ak entènasyonal.</p></div>
-    <div class="service-card"><div class="service-icon">💬</div><h3>Kominikasyon Entèlijan</h3><p>Solisyon dijital pou amelyore kominikasyon ant ekip ou ak kliyan ou yo.</p></div>
-    <div class="service-card"><div class="service-icon">🛒</div><h3>Fasilitasyon Vant</h3><p>Platfòm vant entèlijan ki fè li fasil pou ou vann pwodwi ou yo nenpòt kote.</p></div>
-    <div class="service-card"><div class="service-icon">🔒</div><h3>Sekirite & Konfyans</h3><p>Teknoloji modèn ki pwoteje done ou ak asire tranzaksyon ou yo san risk.</p></div>
-  </div>
-</section>
-<section id="comment">
-  <span class="section-tag">Pwosesis Nou</span>
-  <h2>Kijan Sa Travay?</h2>
-  <div class="steps">
-    <div class="step"><div class="step-num">01</div><div><h3>Enskri Biznis ou</h3><p>Kreye yon pwofil pou biznis ou sou platfòm nan.</p></div></div>
-    <div class="step"><div class="step-num">02</div><div><h3>Prezante Pwodwi ou</h3><p>Platfòm nan montre pwodwi ou yo bay milye de kliyan potansyèl.</p></div></div>
-    <div class="step"><div class="step-num">03</div><div><h3>Resevwa Kliyan</h3><p>Kliyan kontakte ou dirèkteman nan sèkirite.</p></div></div>
-    <div class="step"><div class="step-num">04</div><div><h3>Grandi ak Nou</h3><p>Itilize done ak estrateji nou ba ou pou devlope biznis ou.</p></div></div>
-  </div>
-</section>
-<section class="contact" id="contact">
-  <div class="contact-card">
-    <span class="section-tag">Kontakte Nou</span>
-    <h2>Prè pou Kòmanse?</h2>
-    <p style="color:var(--gray); margin-top:16px;">Ekip nou an la pou ede ou. Voye nou yon imel epi nou ap reponn ou rapidman.</p>
-    <a href="mailto:isteah.ptoussaint14@gmail.com" class="contact-email">isteah.ptoussaint14@gmail.com</a><br>
-    <a href="mailto:isteah.ptoussaint14@gmail.com" class="btn-primary" style="display:inline-block; margin-top:16px;">Voye Imel Kounye a →</a>
-  </div>
-</section>
-<footer>
-  <div class="footer-logo">Optimiste<span> Group</span></div>
-  <p>© 2026 Optimiste Group. Tout dwa rezève.</p>
-  <p style="color:var(--sky);">Ayiti 🇭🇹</p>
-</footer>
+    <div class="logo-circle">
+      <span>OG</span>
+    </div>
+    <h1>
+      Nou Bati<br/>
+      <span class="highlight">Lavni Dijital</span><br/>
+      Ou a
+    </h1>
+    <p class="hero-sub">
+      Optimistegroup kreye aplikasyon mobil ak sit entènèt pwofesyonèl ki ede biznis ou grandi nan laj dijital la.
+    </p>
+    <div class="hero-btns">
+      <a href="#sèvis" class="btn-primary">Wè Sèvis Nou</a>
+      <a href="#kontakt" class="btn-secondary">Kontakte Nou</a>
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section id="sèvis">
+    <div style="max-width:1100px;margin:0 auto;">
+      <p class="section-label">Sa Nou Fè</p>
+      <h2 class="section-title">Sèvis Nou Yo</h2>
+      <p class="section-desc">Nou ofri solisyon teknoloji konplè pou ede biznis ou avanse ak konfyans nan mond dijital la.</p>
+
+      <div class="services-grid">
+        <div class="service-card">
+          <span class="service-icon">📱</span>
+          <h3>Devlopman Aplikasyon</h3>
+          <p>Nou kreye aplikasyon mobil pwofesyonèl pou Android ak iOS ki fasil itilize epi ki bèl nan je kliyan ou yo.</p>
+        </div>
+        <div class="service-card">
+          <span class="service-icon">🌐</span>
+          <h3>Devlopman Sit Entènèt</h3>
+          <p>Nou konstwi sit entènèt modèn, rapid ak responsive ki reprezante biznis ou dwat sou entènèt la.</p>
+        </div>
+        <div class="service-card">
+          <span class="service-icon">🔧</span>
+          <h3>Sipò Teknik</h3>
+          <p>Ekip nou disponib pou ede ou regle tout pwoblèm teknik ak asire sistèm ou ap travay san pwoblèm.</p>
+        </div>
+        <div class="service-card">
+          <span class="service-icon">💡</span>
+          <h3>Konsèy Dijital</h3>
+          <p>Nou ede ou planifye estrateji dijital ou pou maksimize prezans ou sou entènèt ak ogmante vant ou.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="nou">
+    <div style="max-width:1100px;margin:0 auto;">
+      <div class="about-inner">
+        <div>
+          <p class="section-label">Ki Nou Ye</p>
+          <h2 class="section-title">Yon Ekip Pasyonè pou Teknoloji</h2>
+          <p class="section-desc" style="max-width:100%">
+            Optimistegroup se yon konpayi teknoloji ayisyen ki dedye pou kreye solisyon dijital ki chanje vi moun ak biznis yo. Nou kwè nan pouvwa teknoloji pou transfòme Ayiti.
+          </p>
+          <p class="section-desc" style="max-width:100%;margin-top:16px">
+            Nou travay ak pasyon, pwofesyonalis ak yon angajman solid pou bay kliyan nou yo sèvis ki depase atant yo.
+          </p>
+        </div>
+        <div class="about-visual">
+          <div class="about-box">
+            <div class="big-num">100%</div>
+            <div class="big-label">Angajman pou Kalite</div>
+          </div>
+          <div class="stats-row">
+            <div class="stat-mini">
+              <div class="n">🇭🇹</div>
+              <div class="l">Baze Ayiti</div>
+            </div>
+            <div class="stat-mini">
+              <div class="n">24/7</div>
+              <div class="l">Sipò Disponib</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="kontakt">
+    <div style="max-width:1100px;margin:0 auto;">
+      <p class="section-label">Jwenn Nou</p>
+      <h2 class="section-title">Kontakte Nou</h2>
+      <p class="section-desc">Pare pou kòmanse pwojè ou? Kontakte nou jodi a epi ann pale sou bezwen ou yo.</p>
+
+      <div class="contact-grid">
+        <a href="tel:+50935836661" class="contact-card">
+          <span class="contact-icon">📞</span>
+          <div class="contact-info">
+            <div class="label">Telefòn</div>
+            <div class="val">+509 3583 6661</div>
+          </div>
+        </a>
+        <a href="mailto:isteah.ptoussaint14@gmail.com" class="contact-card">
+          <span class="contact-icon">✉️</span>
+          <div class="contact-info">
+            <div class="label">Imèl</div>
+            <div class="val">isteah.ptoussaint14@gmail.com</div>
+          </div>
+        </a>
+        <div class="contact-card">
+          <span class="contact-icon">📍</span>
+          <div class="contact-info">
+            <div class="label">Adrès</div>
+            <div class="val">Cité Verna, Saint-Marc, Haïti</div>
+          </div>
+        </div>
+        <a href="https://facebook.com/optimistegroup" target="_blank" class="contact-card">
+          <span class="contact-icon">📘</span>
+          <div class="contact-info">
+            <div class="label">Facebook</div>
+            <div class="val">Optimistegroup</div>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-logo">Optimiste<span>group</span></div>
+    <p>© 2026 Optimistegroup. Tout dwa rezève.</p>
+    <div class="footer-social">
+      <a href="https://facebook.com/optimistegroup" target="_blank">Facebook →</a>
+    </div>
+  </footer>
+
 </body>
-</html>
+  </html>
